@@ -4345,6 +4345,10 @@
     "mac-page-toolbar-follows-pool-focus": {
       "category": "internal",
       "message": "The address bar above a page treats the page the window shows as focused, as Split View does."
+    },
+    "mac-page-toolbar-history-focus": {
+      "category": "internal",
+      "message": "Opening History from an unfocused Split View pane's address bar brings that pane forward first."
     }
   }
 }

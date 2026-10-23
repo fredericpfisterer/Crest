@@ -30,8 +30,8 @@ extension BrowserSidebarNavigationPort {
     }
 
     /// Binds the strip to one page that the window is not showing, such as an
-    /// unfocused Split View card's. Every action brings the card forward with
-    /// `focus` before it acts on `page`.
+    /// unfocused Split View card's. Every action, History included, brings the
+    /// card forward with `focus` before it acts.
     init(page: BrowserPage?, showHistory: @escaping () -> Void, focus: @escaping () -> Void) {
         self.init(
             canGoBack: { page?.live.canGoBack == true },
@@ -54,7 +54,10 @@ extension BrowserSidebarNavigationPort {
                 focus()
                 page?.goToHistory(item)
             },
-            showHistory: showHistory,
+            showHistory: {
+                focus()
+                showHistory()
+            },
             isLoading: { page?.live.isLoading == true },
             hasActivePage: { page != nil },
             activeURL: { page?.live.displayURL },
