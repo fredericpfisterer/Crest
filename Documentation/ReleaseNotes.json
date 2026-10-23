@@ -4333,6 +4333,10 @@
     "mac-page-toolbar-site-controls-focus": {
       "category": "internal",
       "message": "Bring a Split View pane forward before its own Site Controls open from the address bar above it."
+    },
+    "mac-page-toolbar-follows-pool-focus": {
+      "category": "internal",
+      "message": "The address bar above a page treats the page the window shows as focused, as Split View does."
     }
   }
 }

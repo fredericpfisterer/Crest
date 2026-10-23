@@ -37,9 +37,10 @@ struct BrowserPageToolbar: View {
 
     private var model: BrowserRootModel { context.model }
 
-    /// Whether this toolbar's tab is the one the window shows.
+    /// Whether this toolbar's tab is the one the window shows, as the page
+    /// pool has it, which is what Split View highlights.
     private var isFocused: Bool {
-        model.browser.selectedSpaceID == space.id && model.browser.selectedTabID(in: space.id) == tab.id
+        model.browser.selectedSpaceID == space.id && model.pages.activeTabID == tab.id
     }
 
     var body: some View {
