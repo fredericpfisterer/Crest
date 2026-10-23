@@ -33,6 +33,7 @@ struct BrowserPageToolbar: View {
     /// Each toolbar keeps its field's identities to itself, so cards never
     /// trade them with one another or with the sidebar.
     @Namespace private var fieldNamespace
+    @Environment(\.colorScheme) private var colorScheme
 
     private var model: BrowserRootModel { context.model }
 
@@ -71,7 +72,7 @@ struct BrowserPageToolbar: View {
         // The toolbar wears its Space's color, as the sidebar does, so its
         // controls read the same over any page.
         .background(space.settings.look.shown.primaryColor.color)
-        .environment(\.colorScheme, space.settings.look.shown.foregroundTone.colorScheme)
+        .environment(\.colorScheme, space.settings.look.shown.colorScheme(over: colorScheme))
         .modifier(BrowserDeviceAppearanceEnvironment())
         .modifier(SpaceForegroundBlend(spaces: model.browser.availableSpaces, selectedSpaceID: space.id))
     }
