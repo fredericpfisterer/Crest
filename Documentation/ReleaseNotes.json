@@ -4325,6 +4325,10 @@
     "mac-address-bar-above-pages": {
       "category": "new",
       "message": "On the Mac, the address bar, site controls and back, forward and reload buttons can sit above each page instead of in the sidebar, with one bar per pane in Split View. Turn on Address bar above pages in Appearance settings."
+    },
+    "mac-page-toolbar-site-controls-focus": {
+      "category": "internal",
+      "message": "Bring a Split View pane forward before its own Site Controls open from the address bar above it."
     }
   }
 }

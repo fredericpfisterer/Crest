@@ -60,7 +60,7 @@ struct BrowserPageToolbar: View {
                 submitAddress: model.submitAddress,
                 commandSurfaceNamespace: fieldNamespace,
                 commandPaletteHandoff: .neither,
-                siteControlPresentationChanged: { model.chrome.utilityPresentation.setSiteControlPresented($0) },
+                siteControlPresentationChanged: siteControlPresentationChanged,
                 siteControlContextMenuPresentationChanged: {
                     model.chrome.utilityPresentation.setSiteControlContextMenuPresented($0)
                 }
@@ -91,6 +91,16 @@ struct BrowserPageToolbar: View {
         return BrowserSidebarNavigationPort(page: page, showHistory: showHistory) { [tabID = tab.id] in
             model.focusSplitCard(tabID)
         }
+    }
+
+    // MARK: - Actions - Site Controls
+
+    /// Site Controls act for the window's shown tab, and an engine anchors its
+    /// popups to the focused card's, so opening another card's brings that
+    /// card forward first.
+    private func siteControlPresentationChanged(_ isPresented: Bool) {
+        if isPresented, !isFocused { model.focusSplitCard(tab.id) }
+        model.chrome.utilityPresentation.setSiteControlPresented(isPresented)
     }
 
     // MARK: - Actions - Address
