@@ -10,6 +10,7 @@ enum BrowserLookAndFeelDefaults {
     static let darkSpaceDimming = 0.0
     static let windowBorderWidth = BrowserChromeAppearance.defaultBorderWidth
     static let sidebarOnRight = false
+    static let pageToolbar = false
     static let surfaceMaterial = CrestSurfaceMaterial.standard
     static let cornerRadius: Double = 10
     static let tabScale: Double = 1
@@ -43,6 +44,7 @@ enum BrowserLookAndFeelDefaults {
 
         chrome.set(windowBorderWidth, forKey: BrowserChromeAppearancePreference.borderWidthKey)
         chrome.set(sidebarOnRight, forKey: BrowserChromeAppearancePreference.sidebarOnRightKey)
+        chrome.set(pageToolbar, forKey: BrowserChromeAppearancePreference.pageToolbarKey)
 
         density.set(tabScale, forKey: BrowserSidebarDensityPreference.scaleKey)
         density.set(pinColumns, forKey: BrowserSidebarDensityPreference.pinColumnsKey)

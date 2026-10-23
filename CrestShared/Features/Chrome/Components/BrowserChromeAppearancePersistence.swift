@@ -6,6 +6,8 @@ struct BrowserChromeAppearancePersistence: ViewModifier {
     private var sidebarOnRight = false
     @AppStorage(BrowserChromeAppearancePreference.borderWidthKey, store: BrowserChromeAppearancePreference.defaults)
     private var borderWidth = BrowserChromeAppearance.defaultBorderWidth
+    @AppStorage(BrowserChromeAppearancePreference.pageToolbarKey, store: BrowserChromeAppearancePreference.defaults)
+    private var showsPageToolbar = false
     /// The corner radius of the window this scene fills, which the page frame
     /// follows on Mac.
     @State private var windowCornerRadius: CGFloat?
@@ -18,6 +20,7 @@ struct BrowserChromeAppearancePersistence: ViewModifier {
                 BrowserChromeAppearance(
                     sidebarOnRight: sidebarOnRight,
                     borderWidth: borderWidth,
+                    showsPageToolbar: showsPageToolbar,
                     windowCornerRadius: isWindowFullScreen ? nil : windowCornerRadius
                 )
             )

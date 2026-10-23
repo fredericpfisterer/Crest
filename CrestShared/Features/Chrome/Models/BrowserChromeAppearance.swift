@@ -4,6 +4,9 @@ import SwiftUI
 struct BrowserChromeAppearance: Equatable {
     var sidebarOnRight = false
     var borderWidth: Double = defaultBorderWidth
+    /// Whether each page carries its own back, forward, reload and address
+    /// controls above it, rather than the sidebar carrying the shown page's.
+    var showsPageToolbar = false
     /// The radius of the rounded corners of the window the page sits in. A
     /// full-screen window has none, and only the Mac measures its window.
     var windowCornerRadius: CGFloat?
@@ -12,10 +15,12 @@ struct BrowserChromeAppearance: Equatable {
     static let borderWidthRange: ClosedRange<Double> = 0...10
 
     init(
-        sidebarOnRight: Bool = false, borderWidth: Double = defaultBorderWidth, windowCornerRadius: CGFloat? = nil
+        sidebarOnRight: Bool = false, borderWidth: Double = defaultBorderWidth, showsPageToolbar: Bool = false,
+        windowCornerRadius: CGFloat? = nil
     ) {
         self.sidebarOnRight = sidebarOnRight
         self.borderWidth = borderWidth
+        self.showsPageToolbar = showsPageToolbar
         self.windowCornerRadius = windowCornerRadius
     }
 
@@ -83,6 +88,7 @@ enum BrowserChromeAppearancePreference {
     static let sidebarOnRightKey = "crest.appearance.sidebar-on-right"
     static let borderWidthKey = "crest.appearance.window-border-width"
     static let borderlessKey = "crest.appearance.borderless"
+    static let pageToolbarKey = "crest.appearance.page-toolbar"
     static let defaults = defaults(for: .current)
 
     static func defaults(for environment: BrowserLaunchEnvironment) -> UserDefaults {

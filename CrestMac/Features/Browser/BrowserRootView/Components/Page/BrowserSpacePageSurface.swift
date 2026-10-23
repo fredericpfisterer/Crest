@@ -41,7 +41,8 @@ struct BrowserSpacePageSurface: NSViewRepresentable {
                     tabPromotionNamespace: tabPromotionNamespace,
                     shortcuts: shortcuts,
                     appearance: appearance,
-                    layoutDirection: context.environment.layoutDirection),
+                    layoutDirection: context.environment.layoutDirection,
+                    siteControlAnchor: context.environment.browserSiteControlAnchor),
                 assignment: BrowserSpaceRuntimeAssignment(space: space), objects: objects)
         }
     }

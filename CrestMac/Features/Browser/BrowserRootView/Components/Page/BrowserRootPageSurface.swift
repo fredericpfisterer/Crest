@@ -19,6 +19,10 @@ struct BrowserRootPageSurface: View, @MainActor Equatable {
     let shortcuts: BrowserShortcutStore?
     var appearance = BrowserChromeAppearance()
     var layoutDirection = LayoutDirection.leftToRight
+    /// The view an engine anchors its own popups to, which the window hands its
+    /// pages for the Site Controls in their toolbars. It never changes for a
+    /// window, so equality leaves it out.
+    var siteControlAnchor: BrowserSiteControlAnchor?
 
     /// The retained host needs a new root only when its inputs change. The
     /// models publish their own changes directly to the views that read them.
@@ -77,9 +81,17 @@ struct BrowserRootPageSurface: View, @MainActor Equatable {
         appearance.pageInsets(docked: model.sidebarPresentation.reservesSidebarWidth, direction: layoutDirection)
     }
 
+    /// What each page's toolbar acts through, while the person keeps the
+    /// address bar above pages.
+    private var pageToolbar: BrowserPageToolbar.Context? {
+        guard appearance.showsPageToolbar else { return nil }
+        return BrowserPageToolbar.Context(model: model, siteControlAnchor: siteControlAnchor)
+    }
+
     var body: some View {
         let presentation = pageSurfacePresentation
         return surface(presentation)
+            .environment(\.browserPageToolbar, pageToolbar)
             .overlay { BrowserPageFrameTitleBarSurface(insets: frameInsets) }
             .overlay {
                 BrowserRootPeekLayer(model: model, transientBrowsing: transientBrowsing, space: space)

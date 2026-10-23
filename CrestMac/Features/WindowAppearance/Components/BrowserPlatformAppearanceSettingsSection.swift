@@ -1,8 +1,8 @@
 import SwiftUI
 
 /// The shared Window group, plus the window choices only the desktop has:
-/// light or dark, how far dark dims Space colors, Space page motion and the
-/// sidebar hover area.
+/// light or dark, how far dark dims Space colors, the address bar above pages,
+/// Space page motion and the sidebar hover area.
 struct BrowserPlatformAppearanceSettingsSection: View {
     var space: BrowserSpaceAppearance?
     var showsPreview = false
@@ -12,6 +12,8 @@ struct BrowserPlatformAppearanceSettingsSection: View {
     @AppStorage(SidebarRevealWidthPreference.key, store: BrowserChromeAppearancePreference.defaults)
     private var sidebarRevealWidth = SidebarRevealWidthPreference.defaultValue
     @Bindable private var appearance = BrowserDeviceAppearanceStore.shared
+    @AppStorage(BrowserChromeAppearancePreference.pageToolbarKey, store: BrowserChromeAppearancePreference.defaults)
+    private var showsPageToolbar = BrowserLookAndFeelDefaults.pageToolbar
 
     var body: some View {
         let mode = CrestSettingValue($appearance.mode, default: BrowserLookAndFeelDefaults.appearanceMode)
@@ -22,12 +24,15 @@ struct BrowserPlatformAppearanceSettingsSection: View {
 
         let revealWidth = CrestSettingValue($sidebarRevealWidth, default: SidebarRevealWidthPreference.defaultValue)
 
+        let pageToolbar = CrestSettingValue($showsPageToolbar, default: BrowserLookAndFeelDefaults.pageToolbar)
+
         return BrowserWindowAppearanceGroup(
             space: space,
             showsPreview: showsPreview,
             extraSettings: [
                 mode.resettable("Appearance"),
                 dimming.resettable("Dim Space colors in dark"),
+                pageToolbar.resettable("Address bar above pages"),
                 motion.resettable("Animate pages when switching Spaces"),
                 revealWidth.resettable("Sidebar hover area"),
             ]
@@ -50,6 +55,12 @@ struct BrowserPlatformAppearanceSettingsSection: View {
                 readout: .percent(zero: "Off", full: "Full"),
                 identifier: "dark-space-dimming"
             )
+
+            CrestSettingRow("Address bar above pages", setting: pageToolbar.resettable("Address bar above pages")) {
+                Toggle("Address bar above pages", isOn: pageToolbar.binding)
+                    .labelsHidden()
+                    .accessibilityIdentifier("page-toolbar")
+            }
 
             CrestSettingRow(
                 "Animate pages when switching Spaces",
