@@ -4334,6 +4334,10 @@
       "category": "fixed",
       "message": "The sidebar no longer slides back out under a pointer that is just resting at the screen edge, such as one left there by Universal Control. It reveals when you move the pointer to the edge."
     },
+    "sidebar-hover-in-full-screen": {
+      "category": "new",
+      "message": "Settings > Appearance can keep the sidebar hover area working while a video plays full screen, so the sidebar floats over the video when the pointer reaches the edge of the screen."
+    },
     "mac-address-bar-above-pages": {
       "category": "new",
       "message": "On the Mac, the address bar, site controls and back, forward and reload buttons can sit above each page instead of in the sidebar, with one bar per pane in Split View. Turn on Address bar above pages in Appearance settings."
