@@ -4382,6 +4382,10 @@
       "category": "fixed",
       "message": "Mouse Back and Forward buttons set up as swipes in Logitech Options+ switch Spaces when the pointer is over the sidebar, as other mice do."
     },
+    "background-link-opening-notice": {
+      "category": "improved",
+      "message": "Opening a link in a background tab now shows a brief confirmation at the top of the window."
+    },
     "mac-address-bar-above-pages": {
       "category": "new",
       "message": "On the Mac, the address bar, site controls and back, forward and reload buttons can sit above each page instead of in the sidebar, with one bar per pane in Split View. Turn on Address bar above pages in Appearance settings."
