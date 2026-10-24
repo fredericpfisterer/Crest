@@ -4362,6 +4362,26 @@
       "category": "fixed",
       "message": "Shift-clicking a tab in the sidebar selects every tab between the active tab and the one you clicked, instead of only adding that tab like Command-click."
     },
+    "palette-search-typed-address": {
+      "category": "improved",
+      "message": "The command palette offers to search for a typed or pasted address as well as open it."
+    },
+    "capture-page-shortcut": {
+      "category": "new",
+      "message": "On Mac, Capture Page in the Page menu and the command palette lets you drag over part of a page to copy it as an image. Its shortcut is Command-Shift-2."
+    },
+    "paste-and-match-style-web-pages": {
+      "category": "fixed",
+      "message": "Paste and Match Style now works in editable web content, from the Edit menu, its shortcut and the page's right-click menu."
+    },
+    "pins-stretch-to-fill-row": {
+      "category": "new",
+      "message": "Pins can stretch to fill the width of a row that isn't full, so an uneven number of pins no longer leaves empty space."
+    },
+    "mouse-swipe-buttons-switch-spaces-over-sidebar": {
+      "category": "fixed",
+      "message": "Mouse Back and Forward buttons set up as swipes in Logitech Options+ switch Spaces when the pointer is over the sidebar, as other mice do."
+    },
     "mac-address-bar-above-pages": {
       "category": "new",
       "message": "On the Mac, the address bar, site controls and back, forward and reload buttons can sit above each page instead of in the sidebar, with one bar per pane in Split View. Turn on Address bar above pages in Appearance settings."
