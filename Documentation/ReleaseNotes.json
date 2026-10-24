@@ -4386,6 +4386,10 @@
       "category": "improved",
       "message": "Opening a link in a background tab now shows a brief confirmation at the top of the window."
     },
+    "smooth-appearance-previews": {
+      "category": "fixed",
+      "message": "Dragging an Appearance setting, such as the window border, material, Space icon size or the tab and address field colors, no longer slows the whole app down."
+    },
     "mac-address-bar-above-pages": {
       "category": "new",
       "message": "On the Mac, the address bar, site controls and back, forward and reload buttons can sit above each page instead of in the sidebar, with one bar per pane in Split View. Turn on Address bar above pages in Appearance settings."

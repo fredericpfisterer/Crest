@@ -1,12 +1,18 @@
 import SwiftUI
 
 /// App-wide chrome choices. Presentation never changes browsing ownership.
+///
+/// The device's border and sidebar side live in ``BrowserDeviceAppearanceStore``
+/// and reach a view by Observation, never through a window's environment, which
+/// carries only the window's own corner. A view reads only what it draws: one
+/// that places the sidebar reads the store's side, one that only asks whether
+/// pages have a frame reads ``BrowserDeviceAppearanceStore/isBorderless``, and
+/// the page frames build this with ``device(_:windowCornerRadius:)``. A drag of
+/// the border width so re-renders the frames alone, not the windows around
+/// them.
 struct BrowserChromeAppearance: Equatable {
     var sidebarOnRight = false
     var borderWidth: Double = defaultBorderWidth
-    /// Whether each page carries its own back, forward, reload and address
-    /// controls above it, rather than the sidebar carrying the shown page's.
-    var showsPageToolbar = false
     /// The radius of the rounded corners of the window the page sits in. A
     /// full-screen window has none, and only the Mac measures its window.
     var windowCornerRadius: CGFloat?
@@ -15,17 +21,27 @@ struct BrowserChromeAppearance: Equatable {
     static let borderWidthRange: ClosedRange<Double> = 0...10
 
     init(
-        sidebarOnRight: Bool = false, borderWidth: Double = defaultBorderWidth, showsPageToolbar: Bool = false,
-        windowCornerRadius: CGFloat? = nil
+        sidebarOnRight: Bool = false, borderWidth: Double = defaultBorderWidth, windowCornerRadius: CGFloat? = nil
     ) {
         self.sidebarOnRight = sidebarOnRight
         self.borderWidth = borderWidth
-        self.showsPageToolbar = showsPageToolbar
         self.windowCornerRadius = windowCornerRadius
     }
 
     init(sidebarOnRight: Bool = false, borderless: Bool) {
         self.init(sidebarOnRight: sidebarOnRight, borderWidth: borderless ? 0 : Self.defaultBorderWidth)
+    }
+
+    /// The device's choices in a window whose corners have
+    /// `windowCornerRadius`. Building it in a view's body tracks the border
+    /// width and the sidebar side, as a page frame should.
+    @MainActor
+    static func device(
+        _ store: BrowserDeviceAppearanceStore = .shared, windowCornerRadius: CGFloat?
+    ) -> Self {
+        Self(
+            sidebarOnRight: store.sidebarOnRight, borderWidth: store.windowBorderWidth,
+            windowCornerRadius: windowCornerRadius)
     }
 
     var frameWidth: CGFloat {
@@ -57,7 +73,12 @@ struct BrowserChromeAppearance: Equatable {
     }
 
     func sidebarEdge(in direction: LayoutDirection) -> HorizontalEdge {
-        sidebarOnRight == (direction == .leftToRight) ? .trailing : .leading
+        Self.sidebarEdge(onRight: sidebarOnRight, in: direction)
+    }
+
+    /// The edge a sidebar on the right, or on the left, takes in `direction`.
+    static func sidebarEdge(onRight: Bool, in direction: LayoutDirection) -> HorizontalEdge {
+        onRight == (direction == .leftToRight) ? .trailing : .leading
     }
 
     static func contentInsets(for rect: CGRect, in size: CGSize, direction: LayoutDirection) -> EdgeInsets {
@@ -125,5 +146,8 @@ extension BrowserChromeAppearancePreference {
 }
 
 extension EnvironmentValues {
-    @Entry var browserChromeAppearance = BrowserChromeAppearance()
+    /// The radius of the rounded corners of the window a view is in, which a
+    /// framed page follows on Mac. A full-screen window has none, and only the
+    /// Mac measures its window.
+    @Entry var browserWindowCornerRadius: CGFloat? = nil
 }

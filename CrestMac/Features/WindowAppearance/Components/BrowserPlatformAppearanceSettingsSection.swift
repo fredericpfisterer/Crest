@@ -10,11 +10,7 @@ struct BrowserPlatformAppearanceSettingsSection: View {
 
     @AppStorage(SpacePageMotionPreference.key)
     private var animatesSpacePages = SpacePageMotionPreference.defaultValue
-    @AppStorage(SidebarRevealWidthPreference.key, store: BrowserChromeAppearancePreference.defaults)
-    private var sidebarRevealWidth = SidebarRevealWidthPreference.defaultValue
     @Bindable private var appearance = BrowserDeviceAppearanceStore.shared
-    @AppStorage(BrowserChromeAppearancePreference.pageToolbarKey, store: BrowserChromeAppearancePreference.defaults)
-    private var showsPageToolbar = BrowserLookAndFeelDefaults.pageToolbar
     @AppStorage(SidebarFullscreenRevealPreference.key, store: BrowserChromeAppearancePreference.defaults)
     private var revealsSidebarInFullscreen = SidebarFullscreenRevealPreference.defaultValue
 
@@ -25,11 +21,13 @@ struct BrowserPlatformAppearanceSettingsSection: View {
 
         let motion = CrestSettingValue($animatesSpacePages, default: SpacePageMotionPreference.defaultValue)
 
-        let revealWidth = CrestSettingValue($sidebarRevealWidth, default: SidebarRevealWidthPreference.defaultValue)
+        let revealWidth = CrestSettingValue(
+            $appearance.sidebarRevealWidth, default: SidebarRevealWidthPreference.defaultValue)
         let fullscreenReveal = CrestSettingValue(
             $revealsSidebarInFullscreen, default: SidebarFullscreenRevealPreference.defaultValue)
 
-        let pageToolbar = CrestSettingValue($showsPageToolbar, default: BrowserLookAndFeelDefaults.pageToolbar)
+        let pageToolbar = CrestSettingValue(
+            $appearance.showsPageToolbar, default: BrowserLookAndFeelDefaults.pageToolbar)
 
         return BrowserWindowAppearanceGroup(
             space: space,
@@ -85,7 +83,7 @@ struct BrowserPlatformAppearanceSettingsSection: View {
                 identifier: "sidebar-reveal-width",
                 onEditingChanged: { _ in SidebarRevealWidthPreview.shared.adjusted() }
             )
-            .onChange(of: sidebarRevealWidth) { SidebarRevealWidthPreview.shared.adjusted() }
+            .onChange(of: appearance.sidebarRevealWidth) { SidebarRevealWidthPreview.shared.adjusted() }
 
             CrestSettingRow(
                 "Show sidebar on hover in full screen",
