@@ -4530,6 +4530,18 @@
       "category": "fixed",
       "message": "Passwords saved for an IPv6 address load again, and one saved password Crest can't read no longer hides a Space's other passwords. Settings can remove it."
     },
+    "escaped-address-saved-password-origin": {
+      "category": "fixed",
+      "message": "Passwords imported from another browser are no longer saved for the wrong site when the address contains escaped characters."
+    },
+    "import-invalid-ip-address-passwords": {
+      "category": "fixed",
+      "message": "Importing a password file now lists rows with a malformed IP address as invalid instead of saving passwords that could never fill."
+    },
+    "imported-ip-address-passwords-fill": {
+      "category": "fixed",
+      "message": "Imported passwords for sites at an IP address written in a long or unusual form, such as 127.1, now fill on that site and merge with passwords already saved for it."
+    },
     "mac-address-bar-above-pages": {
       "category": "new",
       "message": "On the Mac, the address bar, site controls and back, forward and reload buttons can sit above each page instead of in the sidebar, with one bar per pane in Split View. Turn on Address bar above pages in Appearance settings."
