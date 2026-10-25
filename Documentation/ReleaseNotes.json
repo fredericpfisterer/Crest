@@ -4542,6 +4542,14 @@
       "category": "fixed",
       "message": "Imported passwords for sites at an IP address written in a long or unusual form, such as 127.1, now fill on that site and merge with passwords already saved for it."
     },
+    "find-shift-return-previous-match": {
+      "category": "fixed",
+      "message": "Pressing Shift-Return in Find moves to the previous match."
+    },
+    "toggle-command-bar-shortcut": {
+      "category": "improved",
+      "message": "Pressing Command-T while the command bar is open closes it."
+    },
     "mac-address-bar-above-pages": {
       "category": "new",
       "message": "On the Mac, the address bar, site controls and back, forward and reload buttons can sit above each page instead of in the sidebar, with one bar per pane in Split View. Turn on Address bar above pages in Appearance settings."
