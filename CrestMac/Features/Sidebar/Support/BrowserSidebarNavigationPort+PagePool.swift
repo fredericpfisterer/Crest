@@ -25,7 +25,7 @@ extension BrowserSidebarNavigationPort {
             reloadOrStop: { pages.reloadOrStop() },
             reload: { pages.forceReload() },
             reloadFromOrigin: { pages.reloadFromOrigin() },
-            clearSiteDataAndReload: { await pages.clearSiteDataAndReload() }
+            clearCookiesAndReload: { await pages.activePage?.clearSiteData(.siteData) }
         )
     }
 
@@ -73,9 +73,9 @@ extension BrowserSidebarNavigationPort {
                 focus()
                 page?.performReload(.fromOrigin)
             },
-            clearSiteDataAndReload: {
+            clearCookiesAndReload: {
                 focus()
-                await page?.clearSiteDataAndReload()
+                await page?.clearSiteData(.siteData)
             }
         )
     }
